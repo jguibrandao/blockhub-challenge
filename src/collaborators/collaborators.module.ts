@@ -17,6 +17,7 @@ import { CollaboratorsSchema } from './schemas/collaborator.schema';
     UsersModule
   ],
   controllers: [CollaboratorsController],
-  providers: [CollaboratorsService]
+  providers: [CollaboratorsService],
+  exports: [CollaboratorsService]
 })
 export class CollaboratorsModule {}
