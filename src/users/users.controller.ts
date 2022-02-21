@@ -27,7 +27,6 @@ export class UsersController {
     }
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
     @HttpCode(HttpStatus.OK)
     public async findAll(): Promise<User[]> {
         return this.usersService.findAll()
