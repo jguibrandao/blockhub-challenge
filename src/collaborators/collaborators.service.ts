@@ -30,7 +30,7 @@ export class CollaboratorsService {
     return this.collaboratorsModel.findByIdAndUpdate(id, updateCollaboratorDto, { new: true })
   }
 
-  remove(id: string) {
+  public async remove(id: string) {
     return this.collaboratorsModel.findByIdAndDelete(id)
   }
 }
