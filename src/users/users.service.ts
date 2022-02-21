@@ -6,6 +6,7 @@ import { User } from './models/users.model';
 import { AuthService } from 'src/auth/auth.service';
 import { SignupDto } from './dto/signup.dto';
 import { SigninDto } from './dto/signin.dto';
+import { JwtSignupDto } from './dto/jwtSignup.dto';
 
 
 @Injectable()
@@ -23,7 +24,7 @@ export class UsersService {
     }
 
     public async signin(signinDto: SigninDto)
-    : Promise<{ name: string; jwtToken: string; email: string }>
+    : Promise<JwtSignupDto>
     {
         const user = await this.findByEmail(signinDto.email)
         const match = await this.checkPassword(signinDto.password, user)
