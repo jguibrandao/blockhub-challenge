@@ -10,27 +10,27 @@ export class CollaboratorsController {
   constructor(private readonly collaboratorsService: CollaboratorsService) {}
 
   @Post()
-  create(@Body() createCollaboratorDto: CreateCollaboratorDto) {
+  public async create(@Body() createCollaboratorDto: CreateCollaboratorDto) {
     return this.collaboratorsService.createCollaborator(createCollaboratorDto);
   }
 
   @Get()
-  findAll() {
+  public async findAll() {
     return this.collaboratorsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  public async findOne(@Param('id') id: string) {
     return this.collaboratorsService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCollaboratorDto: UpdateCollaboratorDto) {
+  public async update(@Param('id') id: string, @Body() updateCollaboratorDto: UpdateCollaboratorDto) {
     return this.collaboratorsService.update(id, updateCollaboratorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  public async remove(@Param('id') id: string) {
     return this.collaboratorsService.remove(id);
   }
 }
