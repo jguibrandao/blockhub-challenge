@@ -19,7 +19,7 @@ export class CreateCollaboratorDto {
     role: string;
 
     @ApiProperty({
-        description: "A date type that tells when you came to blockhub (use - not /",
+        description: "A date type that tells when you came to blockhub (use - not /)",
         example: "2004-06-23"
     })
     @IsNotEmpty()
