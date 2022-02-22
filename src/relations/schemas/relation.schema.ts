@@ -11,5 +11,13 @@ export const RelationSchema = new mongoose.Schema({
     active: {
         type: Boolean,
         required: true
+    },
+    projectName: {
+        type: String,
+        required: true
+    },
+    collaboratorId: {
+        type: String,
+        required: true
     }
 })
