@@ -25,6 +25,19 @@ export class ProjectsService {
     return this.projectsModel.findById(id)
   }
 
+  public async projectNameExists(projectName) {
+    let exists
+    try {
+      await this.projectsModel.findOne({name: projectName})
+      console.log(await this.projectsModel.findOne({name: projectName}))
+      exists = true
+    } catch (err) {
+      exists = false
+    }
+    
+    return exists
+  }
+
   update(id: string, updateProjectDto: UpdateProjectDto) {
     return this.projectsModel.findByIdAndUpdate(id, updateProjectDto, { new: true })
   }
