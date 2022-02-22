@@ -17,35 +17,13 @@ export class RelationsService {
     ) {}
 
     public async joinProject(collaboratorId, projectName, login: JoinProjectDto) {
-        const validation1 = this.verifiesCollaborator(collaboratorId)
-        const validation2 = this.verifiesProject(projectName)
-        if(validation1 && validation2) {
+        const existsCollab = this.collaboratorsService.collaboratorExists(collaboratorId)
+        const existsProject = this.projectsService.projectNameExists(projectName)
+        if(await existsCollab && await existsProject) {
             const relation = new this.relationsModel({...login, projectName: projectName, collaboratorId: collaboratorId})
             return relation.save()
         } else {
             throw new UnauthorizedException()
-        }
-    }
-
-    public async verifiesCollaborator(collaboratorId) {
-        try {
-            const validation = await this.collaboratorsService.findOne(collaboratorId)
-            if(validation._id) {
-                return true
-            }
-        } catch (err) {
-            return false
-        }
-    }
-
-    public async verifiesProject(projectName) {
-        try {
-            const validation = await this.projectsService.findOne(projectName)
-            if(validation.name) {
-                return true
-            }
-        } catch (err) {
-            return false
         }
     }
 }
