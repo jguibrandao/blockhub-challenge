@@ -20,8 +20,8 @@ export class RelationsService {
         const validation1 = this.verifiesCollaborator(collaboratorId)
         const validation2 = this.verifiesProject(projectName)
         if(validation1 && validation2) {
-            const relation = new this.relationsModel(login)
-            return {relation, projectName: projectName, collaboratorId: collaboratorId}
+            const relation = new this.relationsModel({...login, projectName: projectName, collaboratorId: collaboratorId})
+            return relation.save()
         } else {
             throw new UnauthorizedException()
         }
@@ -29,8 +29,8 @@ export class RelationsService {
 
     public async verifiesCollaborator(collaboratorId) {
         try {
-            const validation = this.collaboratorsService.findOne({collaboratorId})
-            if(validation) {
+            const validation = await this.collaboratorsService.findOne(collaboratorId)
+            if(validation._id) {
                 return true
             }
         } catch (err) {
@@ -40,8 +40,8 @@ export class RelationsService {
 
     public async verifiesProject(projectName) {
         try {
-            const validation = this.projectsService.findOne(projectName)
-            if(validation) {
+            const validation = await this.projectsService.findOne(projectName)
+            if(validation.name) {
                 return true
             }
         } catch (err) {
