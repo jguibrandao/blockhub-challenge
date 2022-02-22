@@ -26,6 +26,19 @@ export class CollaboratorsService {
     return this.collaboratorsModel.findById(id)
   }
 
+  public async collaboratorExists(id) {
+    let exists
+    try {
+      await this.collaboratorsModel.findOne({_id: id})
+      console.log(this.collaboratorsModel.findOne({_id: id}))
+      exists = true
+    } catch (err) {
+      exists = false
+    }
+    
+    return exists
+  }
+
   public async update(id: string, updateCollaboratorDto: UpdateCollaboratorDto) {
     return this.collaboratorsModel.findByIdAndUpdate(id, updateCollaboratorDto, { new: true })
   }
